@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love 💗</title>
+
+  <!-- ====== CSS (basic styles, you can replace with yours) ====== -->
+  <style>
+    body {
+      margin: 0;
+      background: #f7f1f5;
+      font-family: "Poppins", sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      width: 100%;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      background: #ffffffaa;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+
+    .top-nav button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #ff9ac4;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    /* Pages */
+    .page {
+      display: none;
+      padding: 20px;
+      animation: fade 0.4s ease;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Gallery Grid */
+    #polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 20px;
+      padding: 10px;
+    }
+
+    .polaroid {
+      width: 100%;
+      aspect-ratio: 3/4;
+      perspective: 900px;
+      cursor: pointer;
+    }
+
+    .polaroid .outer {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+      transform: rotate(calc(var(--rand) * 6deg));
+    }
+
+    .polaroid.flipped .outer {
+      transform: rotateY(180deg);
+    }
+
+    .card, .face {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    .face {
+      backface-visibility: hidden;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .face.back {
+      transform: rotateY(180deg);
+    }
+
+    .thumb, .fullphoto {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .white-strip {
+      width: 100%;
+      height: 25px;
+      background: white;
+      margin-top: auto;
+    }
+
+    /* Letters List */
+    .letter-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 10px;
+    }
+
+    .letter-card {
+      padding: 14px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px #0001;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Letters Popup */
+    #letters-popup.hidden {
+      display: none;
+    }
+    #letters-popup {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: #00000055;
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 100;
+    }
+    .popup-content {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    #close-letters {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #ff7fb2;
+      color: white;
+      font-size: 16px;
+    }
+
+    /* About Page */
+    .about-box {
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px #0001;
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ====== Background Music ====== -->
+  <audio id="bgm" src="New_West_-_Those_Eyes_CeeNaija.com_.mp3" loop></audio>
+
+  <!-- ====== Navigation ====== -->
+  <div class="top-nav">
+    <button data-page="memories">Memories</button>
+    <button data-page="letters">Letters</button>
+    <button data-page="about">About Him</button>
+  </div>
+
+  <!-- ====== PAGES ====== -->
+
+  <!-- PAGE 1: Memories -->
+  <div class="page" id="page-memories">
+    <h2>Our Memories 📸</h2>
+    <div id="polaroid-grid"></div>
+  </div>
+
+  <!-- PAGE 2: Letters -->
+  <div class="page" id="page-letters">
+    <h2>Letters for You 💌</h2>
+    <div class="letter-box"></div>
+  </div>
+
+  <!-- Letters Popup -->
+  <div id="letters-popup" class="hidden">
+    <div class="popup-content">
+      <h3></h3>
+      <p></p>
+      <button id="close-letters">Close</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3: Happy Birthday -->
+  <div class="page" id="page-about">
+    <h2>For you, My Love 💗</h2>
+    <div class="about-box">
+      <p>Happy Birthday, Mr.Idiot 😘💞
+Another year of you being the most annoying, lovable, irresistible person ever. Even from miles away, you still manage to make my heart do that stupid little flip. I miss your face, your laugh, your chaos… literally everything.
+Come back soon, okay? I need to bully you in person again 😭💗✨</p>
+    </div>
+  </div>
+
+  <!-- ====== Your JS File ====== -->
+  <script src="script.js"></script>
+
+</body>
+</html>
